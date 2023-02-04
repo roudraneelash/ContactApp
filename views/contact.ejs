@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title><% title%></title>
+    <!-- refers to the root , i.e assets -->
+    <link rel="stylesheet" href="/css/contact.css">
+  </head>
+  <body>
+    <main>
+      <h1 class="heading">
+        <i class="fa-solid fa-address-book"></i>
+        Contact List
+      </h1>
+      <ul class="contact-list">
+        <% for(let i=0;i<arr.length;i++) {%>
+        <li class="items">
+          <span class="name">
+            <%= arr[i].name %>
+          </span>
+          <span class="phone-no">
+            <%= arr[i].phone %>
+          </span>
+          <span class="icon">
+            <a href="/delete-contact/?id=<%= arr[i]._id%>">
+              <i class="fa-solid fa-trash"></i>
+            </a>
+          </span>
+        </li>
+        <%}%>
+      </ul>
+      <div class="form-container">
+        <form action="/create-entry" method="post">
+          <input type="text" name="name" placeholder="Enter Name" />
+          <input type="text" name="phone" placeholder="Enter Phone no" />
+          <button class="btn grid-item-3">Add</button>
+        </form>
+      </div>
+    </main>
+
+    <script src="https://kit.fontawesome.com/21b47651f1.js" crossorigin="anonymous"></script>
+  </body>
+</html>
