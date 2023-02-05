@@ -38,11 +38,6 @@ app.get("/", (req, res) => {
 //displaying contacts
 
 app.get("/contact", (req, res) => {
-  // return res.render("contact", {
-  //   title: "Contacts Page",
-  //   arr: contacts,
-  // });
-
   Contact.find({}, (err, contacts) => {
     if (err) {
       console.log("Error in db");
@@ -58,7 +53,6 @@ app.get("/contact", (req, res) => {
 //managing post route
 app.post("/create-entry", (req, res) => {
   if (req.body.name != "" && req.body.phone != "") {
-    //  arr.push(req.body);
     Contact.create(
       {
         name: req.body.name,
@@ -66,31 +60,15 @@ app.post("/create-entry", (req, res) => {
       },
       (err, newContact) => {
         if (err) console.log(err);
-
-        console.log(newContact);
       }
     );
   }
 
-  return res.redirect("contact"); //redireting contact page
+  return res.redirect("contact"); //redirecting contact page
 });
 
 app.get("/delete-contact/", (req, res) => {
   let id = req.query.id;
-
-  // let index = -1;
-  // for (let i = 0; i < arr.length; i++) {
-  //   if (
-  //     arr[i].phone == contactphone ||
-  //     arr[i].phone == `+${contactphone.trim()}`
-  //   ) {
-  //     index = i;
-  //     break;
-  //   } else index = -1;
-  // }
-  // if (index != -1) arr.splice(index, 1);
-  // // console.log(index);
-
   Contact.findByIdAndDelete(id, (err) => {
     if (err) console.log("found error in db");
   });
